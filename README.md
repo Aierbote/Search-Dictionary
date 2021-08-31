@@ -1,6 +1,6 @@
 # Search-Dictionary
 
-This is the vers-1 
+This is the vers-1
 
 Command Line Interface program to search a word in a data.json dictionary, made as an exercize during [The Python Mega Course](https://www.udemy.com/gift/the-python-mega-course/) by Ardit Sulce on Udemy.
 
