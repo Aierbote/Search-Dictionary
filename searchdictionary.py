@@ -17,7 +17,7 @@ This version is a bit messy, cause that's how I figured out the exercize
 In the future I might be even extending it or tweaking it abit
 
 Later on the course even to make it useful in webapplication or with a
-Graphical Interface or work with a database instead of dataset for 
+Graphical Interface or work with a database instead of dataset for
 optimal execution timing for loads of data.
 """
 
@@ -48,7 +48,7 @@ def wordsearch(word):
 
     # IN CASE OF WORD MATCHING
     if word in data.keys():   # better to start with simple obvious case, instead of slowing the program with unwanted worse case
-        listing_defin_(word)
+        return listing_defin_(word)
     # if difflib have any matches for not clear words
     elif len(get_close_matches(word, data.keys())) > 0 :
         # get_close_matches returns a list of matches with default ratio of diverence cutoff=0.6
@@ -60,12 +60,14 @@ def wordsearch(word):
             yORn_ = yORn_.lower()   # to avoid case sensitive
 
             if yORn_ == "y":
-                listing_defin_(matched_)
-                break
+                return listing_defin_(matched_)
+
             elif yORn_ == "n":
                 if matched_ == matches_[-1]:
                     return "I'm out of options, sorry.\n\tMaybe check spelling and retry"
                 continue
+            elif yORn_ == r"\end":
+                exit()
             else:
                 return "Sorry, I don't know which word you're searching.\n\tMaybe check spelling and retry"
 
@@ -76,15 +78,14 @@ def wordsearch(word):
 
 if __name__ == "__main__":
     # Keeps running searchdictionary.py unless "\end"
-    while True:
-        try:
+    try:
+        while True:
             your_word = str(input("Let me know the word you search: "))
             query = your_word.lower()   # to avoid case sensitive
 
             # To stop the program entering "\end"
             if query == r"\end":
-                print("Goodbye!")
-                break
+                exit()
 
             # searching query
             print(wordsearch(query))
@@ -96,13 +97,12 @@ if __name__ == "__main__":
             if yORn == "y" :
                 continue
             elif yORn == "n" or yORn == r"\end":
-                print("Goodbye!")
-                break
+                exit()
             else:
                 print("I guess YES you do")
 
-        except:
-            raise
+    except:
+        raise
 
-        finally:
-            pass
+    finally:
+        print("Goodbye 👋" )
