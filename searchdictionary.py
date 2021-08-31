@@ -1,4 +1,7 @@
 """
+This is the exercizeVers-1.1
+Feature of matching words like Delhi or Paris
+
 Command Line Interface program to search a word in a data.json dictionary,
 made as an exercize during The Python Mega Course
 #    https://www.udemy.com/gift/the-python-mega-course/
@@ -11,8 +14,10 @@ This version is a bit messy, cause that's how I figured out the exercize
 ## comfirmation is required.
 ## To stop it any time enter '\end' (without quotes)
 ##      almost anytime :think:
+##      FIXED: ANYTIME ;-) 😉
 ##
 ## It's not case sensitive.
+## Unless your word is Capitalized (as a city) or Title Case (New York)
 
 In the future I might be even extending it or tweaking it abit
 
@@ -67,7 +72,7 @@ def wordsearch(word):
                     return "I'm out of options, sorry.\n\tMaybe check spelling and retry"
                 continue
             elif yORn_ == r"\end":
-                exit()  ## TODO for this to be good enough, I would like a Goobye statement in a Finally codeblock
+                exit()
             else:
                 return "Sorry, I don't know which word you're searching.\n\tMaybe check spelling and retry"
 
@@ -88,8 +93,7 @@ if __name__ == "__main__":
 
             # To stop the program entering "\end"
             if query == r"\end":
-                print("Goodbye!")
-                break
+                exit()
 
             # searching query
             print(wordsearch(query))
@@ -101,8 +105,7 @@ if __name__ == "__main__":
             if yORn == "y" :
                 continue
             elif yORn == "n" or yORn == r"\end":
-                print("Goodbye!")
-                break
+                exit()
             else:
                 print("I guess YES you do")
 
