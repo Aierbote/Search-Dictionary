@@ -18,7 +18,7 @@ It's not case sensitive.
 
 Unless your word is Capitalized (as a city) or Title Case (New York).
 
-To stop it any time enter `\end` (FIXED, it works ANYTIME 😉).
+To stop it any time enter `\end` (FIXED, it works ANYTIME 👋).
 
 ## Future
 
