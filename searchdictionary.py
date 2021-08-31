@@ -17,7 +17,7 @@ This version is a bit messy, cause that's how I figured out the exercize
 In the future I might be even extending it or tweaking it abit
 
 Later on the course even to make it useful in webapplication or with a
-Graphical Interface or work with a database instead of dataset for 
+Graphical Interface or work with a database instead of dataset for
 optimal execution timing for loads of data.
 """
 
@@ -40,15 +40,15 @@ def listing_defin_(word):
         i = data[word].index(defin_)
         i = str(i + 1)
         definition += i + " : " + defin_ + "\n"
-    return f"{definition}"
-
+    return definition
 
 def wordsearch(word):
     """Search a word you're searching and returns vocabulary entry"""
 
     # IN CASE OF WORD MATCHING
     if word in data.keys():   # better to start with simple obvious case, instead of slowing the program with unwanted worse case
-        listing_defin_(word)
+        return listing_defin_(word)
+
     # if difflib have any matches for not clear words
     elif len(get_close_matches(word, data.keys())) > 0 :
         # get_close_matches returns a list of matches with default ratio of diverence cutoff=0.6
@@ -60,12 +60,14 @@ def wordsearch(word):
             yORn_ = yORn_.lower()   # to avoid case sensitive
 
             if yORn_ == "y":
-                listing_defin_(matched_)
+                return listing_defin_(matched_)
                 break
             elif yORn_ == "n":
                 if matched_ == matches_[-1]:
                     return "I'm out of options, sorry.\n\tMaybe check spelling and retry"
                 continue
+            elif yORn_ == r"\end":
+                exit()  ## TODO for this to be good enough, I would like a Goobye statement in a Finally codeblock
             else:
                 return "Sorry, I don't know which word you're searching.\n\tMaybe check spelling and retry"
 
@@ -76,10 +78,13 @@ def wordsearch(word):
 
 if __name__ == "__main__":
     # Keeps running searchdictionary.py unless "\end"
-    while True:
-        try:
+    try:
+        while True:
             your_word = str(input("Let me know the word you search: "))
-            query = your_word.lower()   # to avoid case sensitive
+            if your_word.istitle():
+                query = your_word
+            else:
+                query = your_word.lower()   # to avoid case sensitive
 
             # To stop the program entering "\end"
             if query == r"\end":
@@ -101,8 +106,8 @@ if __name__ == "__main__":
             else:
                 print("I guess YES you do")
 
-        except:
-            raise
+    except:
+        raise
 
-        finally:
-            pass
+    finally:
+        print("Goodbye! 👋")
