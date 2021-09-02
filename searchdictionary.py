@@ -51,18 +51,18 @@ if not isinstance(data, dict):
 def wordsearch(word):
     """Search a word you're searching and returns vocabulary entry"""
 
-    # Let's check how the word was typed inside first, it it's title/capital (e.g. Paris) or upper (acronym without dots, like USA or NATO) it wont' be searched as lower
-    if word.istitle():
-        pass
-    elif word.isupper():
-        pass
-    else:
-        word = word.lower()
-
+    # first storin the word in lower, in case accidental upper letters
+    word = word.lower()
+    # then let's check if there are instances of the viable options in the dictionary, like UPPER Title or similar word
 
     # IN CASE OF WORD MATCHING
     if word in data.keys():   # better to start with simple obvious case, instead of slowing the program with unwanted worse case
         return data[word]
+    # Let's check how the word was typed inside first, it it's title/capital (e.g. Paris) or upper (acronym without dots, like USA or NATO) it wont' be searched as lower
+    elif word.title() in data:
+        return data[word.title()]
+    elif word.upper() in data.keys():
+        return data[word.upper()]
 
     # if difflib have any matches for not clear words
     elif len(get_close_matches(word, data.keys())) > 0 :

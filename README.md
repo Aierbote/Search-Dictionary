@@ -17,7 +17,7 @@ Run `python3 searchdictionary.py` from same folder.
 Enter any words you need to look for and answer Y or N when
 comfirmation is required.
 
-Query IS **case sensitive**. Version 1.2 features Title Case Words or Capitals (like Paris, Delhi, also New York) and UPPERCASE WORDS or simple ACRONYMS (like NATO and USA, without dots)
+Query IS ***NOT* case sensitive** (because word are stored in lower and checked with all their possible CASE string methods). Version 1.2 features Title Case Words or Capitals (like Paris, Delhi, also New York) and UPPERCASE WORDS or simple ACRONYMS (like NATO and USA, without dots)
 
 Comfirmation is not case sensitive.
 
