@@ -36,23 +36,33 @@ data = json.load(open("data.json", "r"))
 if not isinstance(data, dict):
     print("There might be a problem with opening/loading from data.json")
 
+# Useles, because I need to simply return the thing and check if the returned thing is string or a list element as in the video version of app1.py
+# def listing_defin_(word):
+#     """To print one or more word definitions"""
+#     definition = ""
+#     for defin_ in data[word]:
+#         # find the index for each definition in the list of definitions
+#         i = data[word].index(defin_)
+#         i = str(i + 1)
+#         definition += i + " : " + defin_ + "\n"
+#     return definition
 
-def listing_defin_(word):
-    """To print one or more word definitions"""
-    definition = ""
-    for defin_ in data[word]:
-        # find the index for each definition in the list of definitions
-        i = data[word].index(defin_)
-        i = str(i + 1)
-        definition += i + " : " + defin_ + "\n"
-    return definition
 
 def wordsearch(word):
     """Search a word you're searching and returns vocabulary entry"""
 
+    # Let's check how the word was typed inside first, it it's title/capital (e.g. Paris) or upper (acronym without dots, like USA or NATO) it wont' be searched as lower
+    if word.istitle():
+        pass
+    elif word.isupper():
+        pass
+    else:
+        word = word.lower()
+
+
     # IN CASE OF WORD MATCHING
     if word in data.keys():   # better to start with simple obvious case, instead of slowing the program with unwanted worse case
-        return listing_defin_(word)
+        return data[word]
 
     # if difflib have any matches for not clear words
     elif len(get_close_matches(word, data.keys())) > 0 :
@@ -65,8 +75,7 @@ def wordsearch(word):
             yORn_ = yORn_.lower()   # to avoid case sensitive
 
             if yORn_ == "y":
-                return listing_defin_(matched_)
-                break
+                return data(matched_)
             elif yORn_ == "n":
                 if matched_ == matches_[-1]:
                     return "I'm out of options, sorry.\n\tMaybe check spelling and retry"
@@ -86,17 +95,20 @@ if __name__ == "__main__":
     try:
         while True:
             your_word = str(input("Let me know the word you search: "))
-            if your_word.istitle():
-                query = your_word
-            else:
-                query = your_word.lower()   # to avoid case sensitive
 
             # To stop the program entering "\end"
-            if query == r"\end":
+            if your_word == r"\end":
                 exit()
 
             # searching query
-            print(wordsearch(query))
+            output = wordsearch(your_word)
+
+            # let's check if the output is a list of a simple string
+            if type(output) == list:
+                for item in output:
+                    print(output.index(item) +1, ":", item)
+            else:
+                print(output)
 
             # Asking if user wants to see another word
             yORn = str(input("Done. Any other word? Enter Y or N: "))
@@ -109,7 +121,7 @@ if __name__ == "__main__":
             else:
                 print("I guess YES you do")
 
-    except:
+    except Exception:       # this way ^C (`ctrl + C`) will not raise KeyboardInterrupt 
         raise
 
     finally:

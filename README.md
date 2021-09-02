@@ -1,5 +1,10 @@
 # Search-Dictionary
 
+This is exercize (new branch name) version 1.2
+Feature: being able to read uppercase names like USA or NATO
+
+###### MEMENTO note to self, I think it's better for me to implement the previous solution to not alter the query and to check all conditions inside the function instead
+
 This is the exercizeVers-1.1 :
 Feature of matching words like Delhi or Paris.
 
@@ -14,7 +19,9 @@ Run `python3 searchdictionary.py` from same folder.
 Enter any words you need to look for and answer Y or N when
 comfirmation is required.
 
-It's not case sensitive.
+Query IS **case sensitive**. Version 1.2 features Title Case Words or Capitals (like Paris, Delhi, also New York) and UPPERCASE WORDS or simple ACRONYMS (like NATO and USA, without dots)
+
+Comfirmation is not case sensitive.
 
 Unless your word is Capitalized (as a city) or Title Case (New York).
 
