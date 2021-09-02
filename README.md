@@ -3,8 +3,6 @@
 This is exercize (new branch name) version 1.2
 Feature: being able to read uppercase names like USA or NATO
 
-###### MEMENTO note to self, I think it's better for me to implement the previous solution to not alter the query and to check all conditions inside the function instead
-
 This is the exercizeVers-1.1 :
 Feature of matching words like Delhi or Paris.
 
@@ -25,7 +23,8 @@ Comfirmation is not case sensitive.
 
 Unless your word is Capitalized (as a city) or Title Case (New York).
 
-To stop it any time enter `\end` (FIXED, it works ANYTIME 👋).
+To stop it any time enter `\end` (FIXED, it works ANYTIME 👋)\
+Now even with `^C` (`Ctrl + C`) interruption, without raising an Exception
 
 ## Future
 

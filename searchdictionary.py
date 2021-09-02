@@ -121,7 +121,7 @@ if __name__ == "__main__":
             else:
                 print("I guess YES you do")
 
-    except Exception:       # this way ^C (`ctrl + C`) will not raise KeyboardInterrupt 
+    except Exception:       # this way ^C (`ctrl + C`) will not raise KeyboardInterrupt
         raise
 
     finally:
