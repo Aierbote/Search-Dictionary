@@ -75,7 +75,9 @@ def wordsearch(word):
             yORn_ = yORn_.lower()   # to avoid case sensitive
 
             if yORn_ == "y":
+
                 return data(matched_)
+
             elif yORn_ == "n":
                 if matched_ == matches_[-1]:
                     return "I'm out of options, sorry.\n\tMaybe check spelling and retry"
