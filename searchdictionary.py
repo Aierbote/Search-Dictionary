@@ -1,4 +1,7 @@
 """
+This is the exercizeVers-1.1
+Feature of matching words like Delhi or Paris
+
 Command Line Interface program to search a word in a data.json dictionary,
 made as an exercize during The Python Mega Course
 #    https://www.udemy.com/gift/the-python-mega-course/
@@ -11,8 +14,10 @@ This version is a bit messy, cause that's how I figured out the exercize
 ## comfirmation is required.
 ## To stop it any time enter '\end' (without quotes)
 ##      almost anytime :think:
+##      FIXED: ANYTIME ;-) 😉
 ##
 ## It's not case sensitive.
+## Unless your word is Capitalized (as a city) or Title Case (New York)
 
 In the future I might be even extending it or tweaking it abit
 
@@ -31,24 +36,34 @@ data = json.load(open("data.json", "r"))
 if not isinstance(data, dict):
     print("There might be a problem with opening/loading from data.json")
 
-
-def listing_defin_(word):
-    """To print one or more word definitions"""
-    definition = ""
-    for defin_ in data[word]:
-        # find the index for each definition in the list of definitions
-        i = data[word].index(defin_)
-        i = str(i + 1)
-        definition += i + " : " + defin_ + "\n"
-    return f"{definition}"
+# Useles, because I need to simply return the thing and check if the returned thing is string or a list element as in the video version of app1.py
+# def listing_defin_(word):
+#     """To print one or more word definitions"""
+#     definition = ""
+#     for defin_ in data[word]:
+#         # find the index for each definition in the list of definitions
+#         i = data[word].index(defin_)
+#         i = str(i + 1)
+#         definition += i + " : " + defin_ + "\n"
+#     return definition
 
 
 def wordsearch(word):
     """Search a word you're searching and returns vocabulary entry"""
 
+    # first storin the word in lower, in case accidental upper letters
+    word = word.lower()
+    # then let's check if there are instances of the viable options in the dictionary, like UPPER Title or similar word
+
     # IN CASE OF WORD MATCHING
     if word in data.keys():   # better to start with simple obvious case, instead of slowing the program with unwanted worse case
-        return listing_defin_(word)
+        return data[word]
+    # Let's check how the word was typed inside first, it it's title/capital (e.g. Paris) or upper (acronym without dots, like USA or NATO) it wont' be searched as lower
+    elif word.title() in data:
+        return data[word.title()]
+    elif word.upper() in data.keys():
+        return data[word.upper()]
+
     # if difflib have any matches for not clear words
     elif len(get_close_matches(word, data.keys())) > 0 :
         # get_close_matches returns a list of matches with default ratio of diverence cutoff=0.6
@@ -60,7 +75,8 @@ def wordsearch(word):
             yORn_ = yORn_.lower()   # to avoid case sensitive
 
             if yORn_ == "y":
-                return listing_defin_(matched_)
+
+                return data(matched_)
 
             elif yORn_ == "n":
                 if matched_ == matches_[-1]:
@@ -81,14 +97,20 @@ if __name__ == "__main__":
     try:
         while True:
             your_word = str(input("Let me know the word you search: "))
-            query = your_word.lower()   # to avoid case sensitive
 
             # To stop the program entering "\end"
-            if query == r"\end":
+            if your_word == r"\end":
                 exit()
 
             # searching query
-            print(wordsearch(query))
+            output = wordsearch(your_word)
+
+            # let's check if the output is a list of a simple string
+            if type(output) == list:
+                for item in output:
+                    print(output.index(item) +1, ":", item)
+            else:
+                print(output)
 
             # Asking if user wants to see another word
             yORn = str(input("Done. Any other word? Enter Y or N: "))
@@ -101,8 +123,8 @@ if __name__ == "__main__":
             else:
                 print("I guess YES you do")
 
-    except:
+    except Exception:       # this way ^C (`ctrl + C`) will not raise KeyboardInterrupt
         raise
 
     finally:
-        print("Goodbye 👋" )
+        print("Goodbye! 👋")
